@@ -22,6 +22,9 @@
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "/usr/local/bin/ccl") ; your Lisp system
 
+;; Yasnippet
+(setq yas/snippet-dirs "~/.emacs.d/snippets")
+(yas/load-directory yas/snippet-dirs)
 
 ;; Apply shell environment to emacs
 (require 'cl)
