@@ -1,0 +1,2 @@
+- colorize eshell
+- clean up the way the environment variables are imported
