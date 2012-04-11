@@ -26,6 +26,18 @@
 (setq yas/snippet-dirs "~/.emacs.d/snippets")
 (yas/load-directory yas/snippet-dirs)
 
+;; Change this to whatever you use. It's necessary on osx not to get
+;; errors with M-x dired
+(setq insert-directory-program "/usr/local/bin/gls")
+
+;; Textline behavior for CMD + Enter
+(defun textmate-next-line ()
+  "Inserts an indented newline after the current line and moves the point to it."
+  (interactive)
+  (end-of-line)
+  (newline-and-indent))
+(global-set-key (kbd "<s-return>") 'textmate-next-line)
+
 ;; Apply shell environment to emacs
 (require 'cl)
 (defun env-line-to-cons (env-line)
