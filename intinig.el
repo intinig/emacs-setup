@@ -30,6 +30,18 @@
 ;; errors with M-x dired
 (setq insert-directory-program "/usr/local/bin/gls")
 
+;; Comment this if you want to stick to ispell in place of aspell
+(setq ispell-program-name "aspell")
+(setq ispell-extra-args '("--sug-mode=ultra"))
+
+;; Erlang initialization
+;; Set the variables to your taste and needs
+(setq load-path (cons  "/usr/local/Cellar/erlang/R14B03/lib/erlang/lib/tools-2.6.6.4/emacs"
+                       load-path))
+(setq erlang-root-dir "/usr/local/Cellar/erlang/R14B03")
+(setq exec-path (cons "/usr/local/Cellar/erlang/R14B03/bin" exec-path))
+(require 'erlang-start)
+
 ;; Textline behavior for CMD + Enter
 (defun textmate-next-line ()
   "Inserts an indented newline after the current line and moves the point to it."
@@ -38,36 +50,13 @@
   (newline-and-indent))
 (global-set-key (kbd "<s-return>") 'textmate-next-line)
 
-;; Apply shell environment to emacs
-(require 'cl)
-(defun env-line-to-cons (env-line)
-  "Convert a string of the form \"VAR=VAL\" to a cons cell containing (\"VAR\" . \"VAL\")."
-  (if (string-match "\\([^=]+\\)=\\(.*\\)" env-line)
-      (cons (match-string 1 env-line) (match-string 2 env-line))))
+;; Experimental campfire stuff
+(add-to-list 'load-path "~/.emacs.d/packages/campfire")
+(require 'campfire)
+(setq campfire-domains
+      '(((domain . "mikamai.campfirenow.com")
+         (token . "d2811743406b01292a57d02a7cbfc8dca41f1e96")
+         (ssl . t))))
 
-(defun interactive-env-alist (&optional shell-cmd env-cmd)
-  "Launch /usr/bin/env or the equivalent from a login shell, parsing and returning the
-environment as an alist."
-  (let ((cmd (concat (or shell-cmd "$SHELL -lc")
-                     " "
-                     (or env-cmd "/usr/bin/env"))))
-    (mapcar 'env-line-to-cons
-            (remove-if
-             (lambda (str)
-               (string-equal str ""))
-             (split-string (shell-command-to-string cmd) "[\r\n]")))))
 
-(defun setenv-from-cons (var-val)
-  "Set an environment variable from a cons cell containing
-two strings, where the car is the variable name and cdr is
-the value, e.g. (\"VAR\" . \"VAL\")"
-  (setenv (car var-val) (cdr var-val)))
-
-(defun setenv-from-shell-environment (&optional shell-cmd env-cmd)
-  "Apply the environment reported by `/usr/bin/env' (or env-cmd)
-as launched by `$SHELL -lc' (or shell-cmd) to the current
-environment."
-  (mapc 'setenv-from-cons (interactive-env-alist shell-cmd env-cmd)))
-
-(setenv-from-shell-environment)
-(setq exec-path (split-string (getenv "PATH") path-separator))
+(setq debug-on-error t)
