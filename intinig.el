@@ -22,10 +22,6 @@
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "/usr/local/bin/ccl") ; your Lisp system
 
-;; Yasnippet
-(setq yas/snippet-dirs "~/.emacs.d/snippets")
-(yas/load-directory yas/snippet-dirs)
-
 ;; Change this to whatever you use. It's necessary on osx not to get
 ;; errors with M-x dired
 (setq insert-directory-program "/usr/local/bin/gls")
@@ -36,10 +32,10 @@
 
 ;; Erlang initialization
 ;; Set the variables to your taste and needs
-(setq load-path (cons  "/usr/local/Cellar/erlang/R14B03/lib/erlang/lib/tools-2.6.6.4/emacs"
+(setq load-path (cons  "/usr/local/Cellar/erlang/R15B01/lib/erlang/lib/tools-2.6.7/emacs"
                        load-path))
-(setq erlang-root-dir "/usr/local/Cellar/erlang/R14B03")
-(setq exec-path (cons "/usr/local/Cellar/erlang/R14B03/bin" exec-path))
+(setq erlang-root-dir "/usr/local/Cellar/erlang/R15B01")
+(setq exec-path (cons "/usr/local/Cellar/erlang/R15B01/bin" exec-path))
 (require 'erlang-start)
 
 ;; Textline behavior for CMD + Enter

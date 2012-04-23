@@ -17,3 +17,7 @@
 ;; io-mode for io language
 (add-to-list 'load-path "~/.emacs.d/packages/io-mode")
 (require 'io-mode)
+
+;; Yasnippet
+(setq yas/snippet-dirs "~/.emacs.d/snippets")
+(yas/load-directory yas/snippet-dirs)
